@@ -63,16 +63,16 @@ def convert(row):
     preiskategorie = 'X' if row['Abr.'] == 'K' else ''
     result.append(preiskategorie)
 
-    # PIC1 ('Pilot' has pilot name, not ID)
-    result.append(UNKNOWN_VALUE)
+    # PIC1
+    result.append('T')
 
-    # Besatzung1 ('Begleiter/FI' has copilot name, not ID)
+    # Besatzung1 ('Pilot' has pilot name, not ID)
     result.append(UNKNOWN_VALUE)
 
     # Anteil_1
     result.append(UNKNOWN_VALUE)
 
-    # Besatzung2
+    # Besatzung2 ('Begleiter/FI' has copilot name, not ID)
     result.append(UNKNOWN_VALUE)
 
     # Anteil_2
