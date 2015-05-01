@@ -60,7 +60,8 @@ def convert(row):
     result.append('F')
 
     # Preiskategorie
-    result.append(UNKNOWN_VALUE)
+    preiskategorie = 'X' if row['Abr.'] == 'K' else ''
+    result.append(preiskategorie)
 
     # PIC1 ('Pilot' has pilot name, not ID)
     result.append(UNKNOWN_VALUE)
