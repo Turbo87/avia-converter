@@ -112,7 +112,7 @@ def convert(row):
     result.append(UNKNOWN_VALUE)
 
     # Flugart
-    result.append(UNKNOWN_VALUE)
+    result.append(row['Flugart'])
 
     # Startart
     result.append(UNKNOWN_VALUE)
