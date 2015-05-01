@@ -120,17 +120,38 @@ def convert(row, members):
     # Einheiten
     result.append(UNKNOWN_VALUE)
 
+    ohne_marke = ('ohne marke' in row['Bemerkung'].lower() or 'keine marke' in row['Bemerkung'].lower())
+    own_tug_plane = row['Schlepp-Lfz'] in ('D-EFAC', 'D-KUFP')
+
+    pilot = members.get(row['Pilot'])
+    if pilot:
+        is_student = pilot['Kostenstufe'] == 'Jugendlicher'
+    else:
+        is_student = False
+
     # Leistung1
-    result.append(UNKNOWN_VALUE)
+    leistung1 = UNKNOWN_VALUE
+    if own_tug_plane:
+        if ohne_marke and row['Schlepph\xf6he'] in ('600', '1000'):
+            leistung1 = 'FSS6' if is_student else 'FSV6'
+        elif not ohne_marke and row['Schlepph\xf6he'] == '1000':
+            leistung1 = 'FSSZ' if is_student else 'FSVZ'
+
+    result.append(leistung1)
 
     # VLS1PK
-    result.append(UNKNOWN_VALUE)
+    result.append('T' if leistung1 else UNKNOWN_VALUE)
 
     # Leistung2
-    result.append(UNKNOWN_VALUE)
+    leistung2 = UNKNOWN_VALUE
+    if own_tug_plane:
+        if ohne_marke and row['Schlepph\xf6he'] == '1000':
+            leistung2 = 'FSSZ' if is_student else 'FSVZ'
+
+    result.append(leistung2)
 
     # VLS2PK
-    result.append(UNKNOWN_VALUE)
+    result.append('T' if leistung2 else UNKNOWN_VALUE)
 
     # Flugart
     result.append(row['Flugart'])
