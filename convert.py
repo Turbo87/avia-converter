@@ -115,7 +115,7 @@ def convert(row):
     result.append(row['Flugart'])
 
     # Startart
-    result.append(UNKNOWN_VALUE)
+    result.append(row['S.-Art'])
 
     # Luftfahrzeugart
     if row['Lfz.'].startswith('D-E'):
