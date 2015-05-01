@@ -57,7 +57,7 @@ def convert(row):
     result.append(row['Landungen'])
 
     # Ausland
-    result.append(UNKNOWN_VALUE)
+    result.append('F')
 
     # Preiskategorie
     result.append(UNKNOWN_VALUE)
