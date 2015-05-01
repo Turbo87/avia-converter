@@ -17,7 +17,7 @@ def read(input):
         yield row
 
 
-def convert(row):
+def convert(row, members):
     result = []
 
     lfz = row['Lfz.'].split('-')
@@ -65,14 +65,22 @@ def convert(row):
     # PIC1
     result.append('T')
 
-    # Besatzung1 ('Pilot' has pilot name, not ID)
-    result.append(UNKNOWN_VALUE)
+    # Besatzung1
+    pilot = members.get(row['Pilot'], UNKNOWN_VALUE)
+    if pilot != UNKNOWN_VALUE:
+        pilot = pilot['Mitgliedsnr']
+
+    result.append(pilot)
 
     # Anteil_1
     result.append(UNKNOWN_VALUE)
 
     # Besatzung2 ('Begleiter/FI' has copilot name, not ID)
-    result.append(UNKNOWN_VALUE)
+    copilot = members.get(row['Begleiter/FI'], UNKNOWN_VALUE)
+    if copilot != UNKNOWN_VALUE:
+        copilot = copilot['Mitgliedsnr']
+
+    result.append(copilot)
 
     # Anteil_2
     result.append(UNKNOWN_VALUE)
@@ -131,15 +139,28 @@ def convert(row):
     return result
 
 
-def main(input, output):
+def read_members(fp):
+    members = {}
+
+    for row in csv.DictReader(fp, delimiter=';'):
+        name = row['Nachname'] + ', ' + row['Vorname']
+        members[name] = row
+
+    return members
+
+
+def main(input, members, output):
+    members = read_members(members)
+
     writer = csv.writer(output, delimiter=';')
     for row in read(input):
-        writer.writerow(convert(row))
+        writer.writerow(convert(row, members))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert flight logs from vereinsflieger.de CSV to ameavia CSV.')
     parser.add_argument('input', type=file, help='the exported vereinsflieger.de CSV')
+    parser.add_argument('members', type=file, help='the exported ameavia club member list as CSV')
     parser.add_argument('--output', '-o', help='filename for the generated output')
     args = parser.parse_args()
 
@@ -148,4 +169,4 @@ if __name__ == '__main__':
     else:
         output = sys.stdout
 
-    main(args.input, output)
+    main(args.input, args.members, output)
