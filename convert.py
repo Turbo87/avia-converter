@@ -9,7 +9,6 @@ UNKNOWN_VALUE = ''
 
 def read(input):
     reader = csv.DictReader(input, delimiter=';')
-    n = 0
     for row in reader:
         if row['Lfz.'] is None:
             continue
