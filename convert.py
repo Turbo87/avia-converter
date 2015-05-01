@@ -118,7 +118,16 @@ def convert(row):
     result.append(UNKNOWN_VALUE)
 
     # Luftfahrzeugart
-    result.append(UNKNOWN_VALUE)
+    if row['Lfz.'].startswith('D-E'):
+        lfz_art = 1
+    elif row['Lfz.'].startswith('D-K'):
+        lfz_art = 3
+    elif row['Lfz.'].startswith('D-'):
+        lfz_art = 2
+    else:
+        lfz_art = UNKNOWN_VALUE
+
+    result.append(lfz_art)
 
     return result
 
