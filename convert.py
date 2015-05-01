@@ -21,11 +21,19 @@ def read(input):
 def convert(row):
     result = []
 
+    lfz = row['Lfz.'].split('-')
+    if len(lfz) > 1:
+        landeskennung = lfz[0]
+        kennzeichen = lfz[1]
+    else:
+        landeskennung = ''
+        kennzeichen = lfz[0]
+
     # Landeskennung
-    result.append(UNKNOWN_VALUE)
+    result.append(landeskennung)
 
     # Kennzeichen
-    result.append(row['Lfz.'].replace('D-', ''))
+    result.append(kennzeichen)
 
     # Datum
     result.append(row['Datum'])
