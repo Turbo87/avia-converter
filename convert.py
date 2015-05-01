@@ -93,8 +93,8 @@ def convert(row):
     # Bemerkung
     result.append(row['Bemerkung'])
 
-    # Hoehenmeter (maybe 'Schlepphoehe'?)
-    result.append(UNKNOWN_VALUE)
+    # Hoehenmeter
+    result.append(row['Schlepph\xf6he'])
 
     # Einheiten
     result.append(UNKNOWN_VALUE)
