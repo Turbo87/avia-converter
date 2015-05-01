@@ -73,7 +73,14 @@ def convert(row, members):
     result.append(pilot)
 
     # Anteil_1
-    result.append(UNKNOWN_VALUE)
+    if row['Abr.'] == 'P':
+        anteil1 = 100
+    elif row['Abr.'] == 'PB':
+        anteil1 = 50
+    else:
+        anteil1 = 0
+
+    result.append(anteil1)
 
     # Besatzung2 ('Begleiter/FI' has copilot name, not ID)
     copilot = members.get(row['Begleiter/FI'], UNKNOWN_VALUE)
@@ -83,7 +90,14 @@ def convert(row, members):
     result.append(copilot)
 
     # Anteil_2
-    result.append(UNKNOWN_VALUE)
+    if row['Abr.'] == 'B':
+        anteil2 = 100
+    elif row['Abr.'] == 'PB':
+        anteil2 = 50
+    else:
+        anteil2 = 0
+
+    result.append(anteil2)
 
     # Besatzung3
     result.append(UNKNOWN_VALUE)
