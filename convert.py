@@ -59,7 +59,21 @@ def convert(row, members):
     result.append('F')
 
     # Preiskategorie
-    preiskategorie = 'X' if row['Abr.'] == 'K' else ''
+    if row['Abr.'] == 'K':
+        preiskategorie = 'X'
+
+    elif row['Flugart'] in ('C', 'S', 'N'):
+        preiskategorie = 'C'
+
+    elif row['Flugart'] == 'P':
+        preiskategorie = 'G'
+
+    elif row['Flugart'] == 'W':
+        preiskategorie = 'X'
+
+    else:
+        preiskategorie = ''
+
     result.append(preiskategorie)
 
     # PIC1
