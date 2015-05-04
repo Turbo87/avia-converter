@@ -4,13 +4,11 @@
 [Vereinsflieger.de](https://www.vereinsflieger.de/) flight log exports into a
 format that can be imported into [ameavia](http://www.ameavia.de/).
 
-## Installation
-
-TODO: Describe the installation process
-
 ## Usage
 
-TODO: Write usage instructions
+    ./convert.py INPUT MEMBERS
+    
+see `./convert.py -h` for more information
 
 ## Contributing
 
