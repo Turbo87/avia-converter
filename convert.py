@@ -132,7 +132,15 @@ def convert(row, members):
     result.append(row['Schlepph\xf6he'])
 
     # Einheiten
-    result.append(UNKNOWN_VALUE)
+    motor_start = row['M.-Start']
+    motor_ende = row['M.-Ende']
+
+    if motor_start and motor_ende:
+        motor_start = float(motor_start.replace(',', '.'))
+        motor_ende = float(motor_ende.replace(',', '.'))
+        result.append(('%.2f' % (motor_ende - motor_start)).replace('.', ','))
+    else:
+        result.append(UNKNOWN_VALUE)
 
     ohne_marke = ('ohne marke' in row['Bemerkung'].lower() or 'keine marke' in row['Bemerkung'].lower())
     own_tug_plane = row['Schlepp-Lfz'] in ('D-EFAC', 'D-KUFP')
@@ -184,6 +192,9 @@ def convert(row, members):
         lfz_art = UNKNOWN_VALUE
 
     result.append(lfz_art)
+
+    # Einheiten - Zaehlerstand Alt
+    result.append(row['M.-Start'])
 
     return result
 
