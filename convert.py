@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 import argparse
 import csv
@@ -73,6 +74,9 @@ def convert(row, members):
 
     elif row['S.-Art'] == 'E' and row['Flugart'] == 'F' and row['Abr.'] == 'SF':
         preiskategorie = 'X'
+
+    elif row['S.-Art'] == 'F' and row['Flugart'] == 'Ü' and row['Abr.'] == 'P':
+        preiskategorie = 'C'
 
     else:
         preiskategorie = ''
