@@ -71,6 +71,9 @@ def convert(row, members):
     elif row['Flugart'] == 'W':
         preiskategorie = 'X'
 
+    elif row['S.-Art'] == 'E' and row['Flugart'] == 'F' and row['Abr.'] == 'SF':
+        preiskategorie = 'X'
+
     else:
         preiskategorie = ''
 
