@@ -176,7 +176,11 @@ def convert(row, members):
     result.append('T' if leistung2 else UNKNOWN_VALUE)
 
     # Flugart
-    result.append(row['Flugart'])
+    flugart = row['Flugart']
+    if flugart == 'W':
+        flugart = 'N'
+
+    result.append(flugart)
 
     # Startart
     result.append(row['S.-Art'])
