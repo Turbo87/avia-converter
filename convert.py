@@ -145,7 +145,7 @@ def convert(row, members):
     if motor_start and motor_ende:
         motor_start = float(motor_start.replace(',', '.'))
         motor_ende = float(motor_ende.replace(',', '.'))
-        result.append(('%.2f' % (motor_ende - motor_start)).replace('.', ','))
+        result.append('%d' % ((motor_ende - motor_start) * 100))
     else:
         result.append(UNKNOWN_VALUE)
 
@@ -205,7 +205,10 @@ def convert(row, members):
     result.append(lfz_art)
 
     # Einheiten - Zaehlerstand Alt
-    result.append(row['M.-Start'])
+    if motor_start:
+        result.append('%d' % (motor_start * 100))
+    else:
+        result.append(UNKNOWN_VALUE)
 
     return result
 
