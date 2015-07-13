@@ -7,6 +7,40 @@ import sys
 
 UNKNOWN_VALUE = ''
 
+HEADER = [
+    'Landeskennung',
+    'Kennzeichen',
+    'Datum',
+    'Startzeit',
+    'Landezeit',
+    'Flugzeit',
+    'Startort',
+    'Landeort',
+    'Anzahl Landungen',
+    'Ausland',
+    'Preiskategorie',
+    'PIC1',
+    'Besatzung1',
+    'Anteil_1',
+    'Besatzung2',
+    'Anteil_2',
+    'Besatzung3',
+    'Anteil_3',
+    'Besatzung4',
+    'Anteil_4',
+    'Bemerkung',
+    'Hoehenmeter',
+    'Einheiten',
+    'Leistung1',
+    'VLS1PK',
+    'Leistung2',
+    'VLS2PK',
+    'Flugart',
+    'Startart',
+    'Luftfahrzeugart',
+    'Einheiten - Zaehlerstand Alt',
+]
+
 
 def read(input):
     reader = csv.DictReader(input, delimiter=';')
@@ -227,6 +261,7 @@ def main(input, members, output):
     members = read_members(members)
 
     writer = csv.writer(output, delimiter=';')
+    writer.writerow(HEADER)
     for row in read(input):
         writer.writerow(convert(row, members))
 
