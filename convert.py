@@ -274,7 +274,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.output:
-        output = open(args.output, 'w')
+        output = open(args.output, 'wb')
     else:
         output = sys.stdout
 
